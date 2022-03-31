@@ -19,3 +19,5 @@ f.Then Execute 'python3.6 manage.py runserver'
 g.Open a browser(pref. Google Chrome) and navigate to localhost:8000
 
 **You Should install SQLiteDBBrowser to browse and work with the SQLite Database**
+
+this is aq
