@@ -21,3 +21,4 @@ g.Open a browser(pref. Google Chrome) and navigate to localhost:8000
 **You Should install SQLiteDBBrowser to browse and work with the SQLite Database**
 
 this is aq
+hihi
