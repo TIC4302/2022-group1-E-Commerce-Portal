@@ -78,7 +78,7 @@ jobs:
       - name: bandit scan for source code
         uses: jpetrucciani/bandit-check@master
         with:
-          path: 'app/web/chaimtube.py'
+          path: 'app/web/manage.py'
           bandit_flags: '-lll -o logs/bandit.txt'    
 
       - uses: actions/upload-artifact@v2
