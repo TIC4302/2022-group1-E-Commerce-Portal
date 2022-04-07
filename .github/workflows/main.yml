@@ -64,3 +64,24 @@ jobs:
         with:
           name: logs
           path: logs/pyraider-log.txt
+
+  sast:
+    needs: [build, sca]
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - run: 
+          mkdir -p logs/
+      
+      - name: bandit scan for source code
+        uses: jpetrucciani/bandit-check@master
+        with:
+          path: 'app/web/chaimtube.py'
+          bandit_flags: '-lll -o logs/bandit.txt'    
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: logs
+          path: logs/bandit.txt
