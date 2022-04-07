@@ -28,3 +28,39 @@ jobs:
       - name: Build docker-compose
         run: docker-compose -f docker-compose.yml up --build -d
         
+  sca:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out master
+        uses: actions/checkout@master
+
+      - name: Install python
+        uses: actions/setup-python@v1
+        with:
+          python-version: "3.6"
+      
+      - run: mkdir -p logs/
+
+      - name: Install safety
+        run: 
+          pip install safety
+
+      - name: sca analysis 
+        run:
+          safety check -r app/web/requirements.txt > logs/safety-log.txt
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: logs
+          path: logs/safety-log.txt
+
+      - name: Install pyraider
+        run: |
+          pip install pyraider
+          pyraider check -f app/web/requirements.txt > logs/pyraider-log.txt
+      
+      - uses: actions/upload-artifact@v2
+        with:
+          name: logs
+          path: logs/pyraider-log.txt
