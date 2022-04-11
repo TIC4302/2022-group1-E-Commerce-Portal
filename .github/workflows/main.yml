@@ -85,3 +85,25 @@ jobs:
         with:
           name: logs
           path: logs/bandit.txt
+
+
+
+sast:
+    needs: [build, sca]
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2 
+        
+      - run: |
+          mkdir -p logs/      
+      
+      - uses: jpetrucciani/bandit-check@master
+        with:
+          path: '.'
+          bandit_flags: '-lll -o logs/output.json -f json'
+    
+      - uses: actions/upload-artifact@v2
+        with:
+          name: logs
+          path: logs/output.json
