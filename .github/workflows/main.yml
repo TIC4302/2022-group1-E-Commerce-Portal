@@ -88,22 +88,22 @@ jobs:
 
 
 
-sast:
-    needs: [build, sca]
-    runs-on: ubuntu-latest
 
+  container-scan:
+   needs: [sast]
+   runs-on: ubuntu-latest
+ 
     steps:
-      - uses: actions/checkout@v2 
+      - name: Run Dockle
+        uses: erzz/dockle-action@v1.1.1
+        with:
+          image: sristisravan/tic4302-demo
+          report-format: json
+          report-name: dockle-report
         
-      - run: |
-          mkdir -p logs/      
-      
-      - uses: jpetrucciani/bandit-check@master
+      - name: Upload Report
+        uses: actions/upload-artifact@v2
+        if: always()
         with:
-          path: '.'
-          bandit_flags: '-lll -o logs/output.json -f json'
-    
-      - uses: actions/upload-artifact@v2
-        with:
-          name: logs
-          path: logs/output.json
+          name: Dockle Report
+          path: dockle-report.json
