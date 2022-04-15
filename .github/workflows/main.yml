@@ -87,8 +87,6 @@ jobs:
           path: logs/bandit.txt
 
 
-
-
   container-scan:
     needs: [sast]
     runs-on: ubuntu-latest
@@ -97,7 +95,7 @@ jobs:
       - name: Run Dockle
         uses: erzz/dockle-action@v1.1.1
         with:
-          image: sristisravan/tic4302-demo
+          image: aiqianchee/tic4302-demo
           report-format: json
           report-name: dockle-report
         
@@ -126,8 +124,8 @@ jobs:
       - name: Login to DockerHub
         uses: docker/login-action@v1 
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          username: aiqianchee
+          password: d9c3fb42-0d13-4348-b4b2-40bdbe98797e
       
       - name: Build and push
         id: docker_build
