@@ -135,4 +135,4 @@ jobs:
           file: ./app/web/Dockerfile
           builder: ${{ steps.buildx.outputs.name }}
           push: true
-          tags: jaydetanjiamin/tic4302-ecommerce:tagname:latest
+          tags: jaydetanjiamin/tic4302-ecommerce:latest
