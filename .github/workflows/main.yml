@@ -125,7 +125,7 @@ jobs:
         uses: docker/login-action@v1 
         with:
           username: aiqianchee
-          password: d9c3fb42-0d13-4348-b4b2-40bdbe98797e
+          password: 1d5931de-9935-44ae-b3cd-3383fe22bea2
       
       - name: Build and push
         id: docker_build
@@ -135,4 +135,4 @@ jobs:
           file: ./app/web/Dockerfile
           builder: ${{ steps.buildx.outputs.name }}
           push: true
-          tags: jaydetanjiamin/tic4302-ecommerce:latest
+          tags: aiqianchee/tic4302-ecommerce:latest
