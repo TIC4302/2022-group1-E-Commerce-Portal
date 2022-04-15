@@ -1,4 +1,4 @@
-USE chaimtube;
+USE manage;
 
 CREATE TABLE IF NOT EXISTS `Account` (
       `user_id` int(11) NOT NULL AUTO_INCREMENT,
