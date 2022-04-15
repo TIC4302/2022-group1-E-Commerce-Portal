@@ -95,7 +95,7 @@ jobs:
       - name: Run Dockle
         uses: erzz/dockle-action@v1.1.1
         with:
-          image: aiqianchee/tic4302-demo
+          image: aiqianchee/tic4302-ecommerce
           report-format: json
           report-name: dockle-report
         
@@ -105,6 +105,20 @@ jobs:
         with:
           name: Dockle Report
           path: dockle-report.json
+
+      - name: Dockle for mariadb
+        uses: erzz/dockle-action@v1.1.1
+        with:
+          image: mariadb:10.4.12
+          report-format: json
+          report-name: dockle-report-mariadb
+      
+      - name: Upload Report
+        uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: Dockle Report
+          path: dockle-report-mariadb.json
 
 
   deploy:
