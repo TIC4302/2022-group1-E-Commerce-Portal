@@ -134,7 +134,7 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
       
-      #created the dockerhub secrets   
+      #this only can be done after we are granted admin rights to this repo, cannot create secrets in the github actiogns  
       - name: Login to DockerHub
         uses: docker/login-action@v1 
         with:
@@ -151,7 +151,6 @@ jobs:
           push: true
           tags: aiqianchee/tic4302-ecommerce:latest
 
-
   dast:
     needs: [deploy]
     runs-on: ubuntu-latest
@@ -167,5 +166,5 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           docker_name: 'owasp/zap2docker-stable'
-          target: 'http://localhost:5000'
+          target: 'http://localhost:8000'
           cmd_options: '-a'   
