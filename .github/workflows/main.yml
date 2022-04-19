@@ -1,8 +1,11 @@
-name: CI  
+name: main CI  
 
 on:
   push:
-    branches: [master]
+    branches: [master, sub]
+
+env:
+  DEP_PATH: requirements.txt
 
 jobs:
   secret-scan:
@@ -15,6 +18,7 @@ jobs:
         run: |
           mkdir -p configuration
           echo 'app/' > configuration/exclude_path.txt
+
       - uses: max/secret-scan@master
         with:
           exclude_path: 'configuration/exclude_path.txt'
@@ -55,6 +59,19 @@ jobs:
           name: logs
           path: logs/safety-log.txt
 
+#      - name: Install pyraider
+#        run: 
+#          pip install pyraider
+
+#      - name: sca analysis - pyraider
+#        run:
+#          safety check -f app/web/requirements.txt > logs/pyraider-log.txt
+
+#      - uses: actions/upload-artifact@v2
+#        with:
+#          name: logs
+#          path: logs/pyraider-log.txt
+
   sast:
     needs: [build, sca]
     runs-on: ubuntu-latest
@@ -78,6 +95,7 @@ jobs:
 
 
   container-scan:
+
     needs: [sast]
     runs-on: ubuntu-latest
  
@@ -140,3 +158,36 @@ jobs:
           builder: ${{ steps.buildx.outputs.name }}
           push: true
           tags: aiqianchee/tic4302-ecommerce:latest
+
+  dast:
+   needs: [deploy]
+   runs-on: ubuntu-latest
+   steps:
+     - name: Checkout
+       uses: actions/checkout@v2
+    
+     - name: Build Image for testing
+       run: docker-compose -f docker-compose.yml up --build -d
+
+     - name: Install dependencies
+       run: pip install -r requirements.txt
+ 
+     - name: ZAP Scan
+       run: |
+          mkdir -p logs/
+          sudo docker run --net=default_network -t owasp/zap2docker-stable zap-baseline.py -t http://localhost:8000/ > logs/owasp.log || true
+          
+      - name: Upload ZAP scan log
+        uses: actions/upload-artifact@v3
+        with:
+             name: owaspzap
+             path: logs/owasp.log  
+
+
+
+#       uses: zaproxy/action-baseline@v0.6.1
+#       with:
+#         token: ${{ secrets.GITHUB_TOKEN }}
+#         docker_name: 'owasp/zap2docker-stable'
+#         target: 'http://localhost:8000'
+#         cmd_options: '-a'  
