@@ -157,6 +157,18 @@ jobs:
           push: true
           tags: aiqianchee/tic4302-ecommerce:latest
 
+
+  runServer:
+    runs-on: ubuntu-latest
+    steps:
+    
+      - name: Make migrations
+        run: python app/web/manage.py makemigrations
+
+      - name: Run server
+        run: python app/web/manage.py runserver
+
+
   dast:
     needs: [deploy]
     runs-on: ubuntu-latest
@@ -169,12 +181,6 @@ jobs:
 
       - name: Install dependencies
         run: pip install -r app/web/requirements.txt 
-
-      - name: Make migrations
-        run: python app/web/manage.py makemigrations
-
-      - name: Run server
-        run: python app/web/manage.py runserver
  
       - name: ZAP Scan
         run: |
