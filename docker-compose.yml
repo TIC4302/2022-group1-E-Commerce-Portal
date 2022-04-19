@@ -23,4 +23,4 @@ services:
 
 networks:
   project:
-  name: project
+    name : project
