@@ -46,7 +46,7 @@ jobs:
         run: 
           pip install safety
 
-      - name: sca analysis 
+      - name: sca analysis - safety
         run:
           safety check -r app/web/requirements.txt > logs/safety-log.txt
 
@@ -56,8 +56,11 @@ jobs:
           path: logs/safety-log.txt
 
       - name: Install pyraider
-        run: |
+        run: 
           pip install pyraider
+
+      - name: sca analysis - pyraider
+        run:
           pyraider check -f app/web/requirements.txt > logs/pyraider-log.txt
       
       - uses: actions/upload-artifact@v2
