@@ -18,3 +18,10 @@ RUN useradd -u 8877 user
 USER user
 #RUN python /manage.py makemigrations
 #RUN python /manage.py runserver
+
+##########################################
+# Add HEALTHCHECK instruction to the container image
+# Based on the reported health status, the docker engine could then exit non-working containers and instantiate new ones
+###########################################
+HEALTHCHECK --interval=5m --timeout=3s \
+  CMD curl -f http://localhost/ || exit 1
