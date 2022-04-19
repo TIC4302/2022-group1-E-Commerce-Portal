@@ -176,10 +176,10 @@ jobs:
           sudo docker run --net=default_network -t owasp/zap2docker-stable zap-baseline.py -t http://localhost:8000/ > logs/owasp.txt || true
           
       - name: Upload ZAP scan log
-        uses: actions/upload-artifact@v3
-        with:
-              name: logs
-              path: logs/owasp.txt
+        #uses: actions/upload-artifact@v3
+        #with:
+              #name: logs
+              #path: logs/owasp.txt
 
 
 
