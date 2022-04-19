@@ -71,7 +71,8 @@ jobs:
 #          path: logs/pyraider-log.txt
 
   sast:
-    needs: [build, sca]
+    #needs: [build, sca]
+    needs: [sca]
     runs-on: ubuntu-latest
 
     steps:
