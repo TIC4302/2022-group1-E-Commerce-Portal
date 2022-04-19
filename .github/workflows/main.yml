@@ -55,19 +55,6 @@ jobs:
           name: logs
           path: logs/safety-log.txt
 
-      - name: Install pyraider
-        run: 
-          pip install pyraider
-
-      - name: sca analysis - pyraider
-        run:
-          pyraider check -f app/web/requirements.txt
-      
-      - uses: actions/upload-artifact@v2
-        with:
-          name: logs
-          path: logs/pyraider-log.txt
-
   sast:
     needs: [build, sca]
     runs-on: ubuntu-latest
