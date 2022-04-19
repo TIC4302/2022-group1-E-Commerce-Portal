@@ -190,7 +190,8 @@ jobs:
       - name: Upload ZAP scan log
         uses: actions/upload-artifact@v3
         with:
-              name: logs
+              name: zap-scan
+              path: logs/owasp.log  
 
 #      - name: ZAP Scan 2
 #        uses: zaproxy/action-baseline@v0.6.1
