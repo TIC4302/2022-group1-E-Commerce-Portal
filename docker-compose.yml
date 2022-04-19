@@ -22,4 +22,5 @@ services:
       - project
 
 networks:
-  project:
+    default:
+      name: default_network
