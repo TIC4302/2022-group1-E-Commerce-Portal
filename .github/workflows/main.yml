@@ -163,10 +163,10 @@ jobs:
     steps:
     
       - name: Make migrations
-        run: python manage.py makemigrations
+        run: python ./app/web/manage.py makemigrations
 
       - name: Run server
-        run: python manage.py runserver
+        run: python ./app/web/manage.py runserver
 
 
   dast:
