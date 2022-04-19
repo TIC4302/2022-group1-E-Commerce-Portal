@@ -163,13 +163,13 @@ jobs:
     steps:
     
       - name: Make migrations
-        run: python3.6 /app/web/manage.py makemigrations
+        run: python3 /app/web/manage.py makemigrations
 
       - name: Run migrate
-        run: python3.6 /app/web/manage.py migrate
+        run: python3 /app/web/manage.py migrate
 
       - name: Run server
-        run: python3.6 /app/web/manage.py runserver
+        run: python3 /app/web/manage.py runserver
 
 
   dast:
