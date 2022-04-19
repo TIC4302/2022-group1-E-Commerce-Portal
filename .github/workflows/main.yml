@@ -170,10 +170,10 @@ jobs:
       - name: Install dependencies
         run: pip install -r app/web/requirements.txt 
 
-      -name: Make migrations
+      - name: Make migrations
         run: python app/web/manage.py makemigrations
 
-      -name: Run server
+      - name: Run server
         run: python app/web/manage.py runserver
  
       - name: ZAP Scan
