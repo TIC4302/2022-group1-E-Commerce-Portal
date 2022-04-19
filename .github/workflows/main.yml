@@ -38,7 +38,7 @@ jobs:
       - name: Install python
         uses: actions/setup-python@v1
         with:
-          python-version: "3.6"
+          python-version: "3.7"
       
       - run: mkdir -p logs/
 
@@ -61,7 +61,7 @@ jobs:
 
       - name: sca analysis - pyraider
         run:
-          pyraider check -f app/web/requirements.txt > logs/pyraider-log.txt
+          pyraider check -f app/web/requirements.txt
       
       - uses: actions/upload-artifact@v2
         with:
