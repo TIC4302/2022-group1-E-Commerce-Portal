@@ -158,18 +158,18 @@ jobs:
           tags: aiqianchee/tic4302-ecommerce:latest
 
 
-  runServer:
-    runs-on: ubuntu-latest
-    steps:
+#  runServer:
+#    runs-on: ubuntu-latest
+#    steps:
     
-      - name: Make migrations
-        run: python3 /app/web/manage.py makemigrations
+#      - name: Make migrations
+#        run: python3 /app/web/manage.py makemigrations
 
-      - name: Run migrate
-        run: python3 /app/web/manage.py migrate
+#      - name: Run migrate
+#        run: python3 /app/web/manage.py migrate
 
-      - name: Run server
-        run: python3 /app/web/manage.py runserver
+#      - name: Run server
+#        run: python3 /app/web/manage.py runserver
 
 
   dast:
