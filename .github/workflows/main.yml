@@ -193,10 +193,12 @@ jobs:
               name: zap-scan
               path: logs/owasp.log  
 
-#      - name: ZAP Scan 2
-#        uses: zaproxy/action-baseline@v0.6.1
-#        with:
-#          token: ${{ secrets.GITHUB_TOKEN }}
-#          docker_name: 'owasp/zap2docker-stable'
-#          target: 'http://localhost:8000'
-#          cmd_options: '-a'  
+      - name: ZAP Scan 2
+        uses: zaproxy/action-full-scan@v0.3.0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          docker_name: 'owasp/zap2docker-stable'
+          target: 'http://localhost:8000'
+          cmd_options: 'a -l WARN'
+          allow_issue_writing: false
+          fail_action: false  
