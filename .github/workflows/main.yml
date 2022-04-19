@@ -179,7 +179,7 @@ jobs:
 #        uses: actions/upload-artifact@v3
 #        with:
 #              name: logs
-#              path: logs/owasp.txt
+#              path: logs/owasp.txt 
 
   dast:
     needs: [deploy]
