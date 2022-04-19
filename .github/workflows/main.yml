@@ -176,7 +176,8 @@ jobs:
 
 
   dast:
-    needs: [deploy]
+    #needs: [deploy]
+    needs: container-scan
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
