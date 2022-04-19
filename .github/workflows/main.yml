@@ -71,8 +71,7 @@ jobs:
 #          path: logs/pyraider-log.txt
 
   sast:
-    #needs: [build, sca]
-    needs: [sca]
+    needs: [build, sca]
     runs-on: ubuntu-latest
 
     steps:
@@ -176,8 +175,7 @@ jobs:
 
 
   dast:
-    #needs: [deploy]
-    needs: container-scan
+    needs: [deploy]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
