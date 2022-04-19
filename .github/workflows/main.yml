@@ -170,7 +170,7 @@ jobs:
        run: docker-compose -f docker-compose.yml up --build -d
 
      - name: Install dependencies
-       run: pip install -r requirements.txt
+       run: pip install -r app/web/requirements.txt
  
      - name: ZAP Scan
        run: |
