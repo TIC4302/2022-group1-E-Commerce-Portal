@@ -164,8 +164,8 @@ jobs:
     
       - name: Make migrations
         run: |
-        cd app/web/
-        python manage.py makemigrations
+          cd app/web/
+          python manage.py makemigrations
 
 #      - name: Run migrate
 #        run: python manage.py migrate
@@ -191,6 +191,7 @@ jobs:
         run: |
           mkdir -p logs/
           sudo docker run --net=project -t owasp/zap2docker-stable zap-baseline.py -t http://localhost:8000/ > logs/owasp.log || true
+
           
       - name: Upload ZAP scan log
         uses: actions/upload-artifact@v3
