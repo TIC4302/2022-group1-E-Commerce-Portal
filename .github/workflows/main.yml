@@ -158,34 +158,34 @@ jobs:
           tags: aiqianchee/tic4302-ecommerce:latest
 
   dast:
-   needs: [deploy]
-   runs-on: ubuntu-latest
-   steps:
-     - name: Checkout
-       uses: actions/checkout@v2
+    needs: [deploy]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
     
-     - name: Build Image for testing
-       run: docker-compose -f docker-compose.yml up --build -d
+      - name: Build Image for testing
+        run: docker-compose -f docker-compose.yml up --build -d
 
-#     - name: Install dependencies
-#       run: pip install -r app/web/requirements.txt 
+      - name: Install dependencies
+        run: pip install -r app/web/requirements.txt 
  
-     - name: ZAP Scan
-#       run: |
-#          mkdir -p logs/
-#          sudo docker run --net=default_network -t owasp/zap2docker-stable zap-baseline.py -t http://localhost:8000/ > logs/owasp.txt || true
+      - name: ZAP Scan
+        run: |
+          mkdir -p logs/
+          sudo docker run --net=default_network -t owasp/zap2docker-stable zap-baseline.py -t http://localhost:8000/ > logs/owasp.txt || true
           
-#      - name: Upload ZAP scan log
-#        uses: actions/upload-artifact@v3
-#        with:
-#             name: logs
-#             path: logs/owasp.txt
+      - name: Upload ZAP scan log
+        uses: actions/upload-artifact@v3
+        with:
+              name: logs
+              path: logs/owasp.txt
 
 
 
-       uses: zaproxy/action-baseline@v0.6.1
-       with:
-         token: ${{ secrets.GITHUB_TOKEN }}
-         docker_name: 'owasp/zap2docker-stable'
-         target: 'http://localhost:8000'
-         cmd_options: '-a'  
+        uses: zaproxy/action-baseline@v0.6.1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          docker_name: 'owasp/zap2docker-stable'
+          target: 'http://localhost:8000'
+          cmd_options: '-a'  
