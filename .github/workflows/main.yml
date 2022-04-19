@@ -160,7 +160,7 @@ jobs:
 
   runServer:
     runs-on: ubuntu-latest
-      steps:
+    steps:
     
       - name: Make migrations
         run: python app/web/manage.py makemigrations
