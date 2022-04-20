@@ -182,22 +182,25 @@ jobs:
         uses: actions/checkout@v2
     
       - name: Build Image for testing
-        run: docker-compose -f docker-compose.yml up --build -d
-
-      - name: Install dependencies
-        run: pip install -r app/web/requirements.txt 
+        run: docker-compose -f docker-compose.yml up --build -d 
  
       - name: Setup python environment 
         uses: actions/setup-python@v2
         with:
           python-version: '3.x'
 
+      - name: Install dependencies
+        run: pip install -r app/web/requirements.txt
+
+      - name: Install dependencies
+        run: python manage.py makemigrations
+        
       - name: Run Migrations # run migrations to create table inside db container
         run: python manage.py migrate
 
       - name: Run server
         run: python manage.py runserver
-        
+
       - name: ZAP Scan
         run: |
           mkdir -p logs/
