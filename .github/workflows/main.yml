@@ -187,6 +187,17 @@ jobs:
       - name: Install dependencies
         run: pip install -r app/web/requirements.txt 
  
+      - name: Setup python environment 
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: Run Migrations # run migrations to create table inside db container
+        run: python manage.py migrate
+
+      - name: Run server
+        run: python manage.py runserver
+        
       - name: ZAP Scan
         run: |
           mkdir -p logs/
