@@ -7,4 +7,3 @@ pymysql
 requests
 python-dotenv
 Django
-django
