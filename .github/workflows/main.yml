@@ -16,6 +16,8 @@ jobs:
         run: |
           mkdir -p configuration
           echo 'app/db/' > configuration/exclude_path.txt
+          echo 'app/web/adminlogin/templates/adminlogin/' > configuration/exclude_path.txt
+          echo 'app/web/home/templates/home/' > configuration/exclude_path.txt
 
       - uses: max/secret-scan@master
         with:
